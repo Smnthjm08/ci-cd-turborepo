@@ -1,31 +1,13 @@
-# shadcn/ui monorepo template
+# Turborepo Starter Project
 
-This template is for creating a monorepo with shadcn/ui.
+This project is a starter template for building modern web applications using a monorepo setup powered by Turborepo. It includes the following components:
 
-## Usage
+- **Express Backend**: A robust backend API built with Express.js.
+- **WebSocket Backend**: A real-time backend application using WebSocket.
+- **Next.js Frontend**: A powerful React-based frontend framework for building user interfaces.
+- **Prisma Database**: A modern ORM for database management and queries.
+- **ShadCN Component Library**: A collection of accessible and customizable UI components.
 
-```bash
-pnpm dlx shadcn@latest init
-```
+> **Note**: CI/CD pipelines are yet to be implemented in this project.
 
-## Adding components
-
-To add components to your app, run the following command at the root of your `web` app:
-
-```bash
-pnpm dlx shadcn@latest add button -c apps/web
-```
-
-This will place the ui components in the `packages/ui/src/components` directory.
-
-## Tailwind
-
-Your `tailwind.config.ts` and `globals.css` are already set up to use the components from the `ui` package.
-
-## Using components
-
-To use the components in your app, import them from the `ui` package.
-
-```tsx
-import { Button } from "@workspace/ui/components/button"
-```
+This starter provides a solid foundation for scalable and maintainable web applications.
