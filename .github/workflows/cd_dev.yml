@@ -11,11 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: SSH into server and redeploy
+      - name: Setup SSH key
         run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
-          chmod 600 ~/ssh_key
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key root@64.227.156.142 << 'EOF'
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > key.pem
+          chmod 600 key.pem
+
+      - name: SSH and deploy
+        run: |
+          ssh -o StrictHostKeyChecking=no -i key.pem root@64.227.156.142 << 'EOF'
             cd ci-cd-turborepo/
             git pull origin main
             pnpm install
@@ -24,3 +27,4 @@ jobs:
             pm2 restart http
             pm2 restart ws
           EOF
+
