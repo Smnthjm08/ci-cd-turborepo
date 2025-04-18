@@ -5,10 +5,10 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("hi there");
+  res.json("Your http server is running fine!👍🏻🚀");
 });
 
-app.post("/sigup", async (req, res) => {
+app.post("/signup", async (req, res) => {
   const { username, password } = req.body;
   const user = await prisma.user.create({
     data: {
