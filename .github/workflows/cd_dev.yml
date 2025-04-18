@@ -1,0 +1,26 @@
+name: Deploy to development
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  redeploy:
+    name: Deploying everything to staging cluster
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: SSH into server and redeploy
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
+          chmod 600 ~/ssh_key
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key root@${{ secrets.DEV_PUBLIC_IP }} << 'EOF'
+            cd ci-cd-turborepo/
+            git pull origin main
+            pnpm install
+            pnpm run build
+            pm2 restart web
+            pm2 restart http
+            pm2 restart ws
+          EOF
